@@ -47,7 +47,7 @@ const InvoiceSection = () => {
       <div className="vendor-details">
         <h1>
           <span>
-            <img src="/src/assests/real-estate-11.png" alt="Vendor Icon" />
+            <img src="/real-estate-11.png" alt="Vendor Icon" />
           </span>
           Vendor Details
         </h1>
@@ -82,7 +82,7 @@ const InvoiceSection = () => {
       <div className="vendor-details">
         <h1>
           <span>
-            <img src="/src/assests/icons8-receipt-64.png" alt="Invoice Icon" />
+            <img src="/icons8-receipt-64.png" alt="Invoice Icon" />
           </span>
           Invoice Details
         </h1>
@@ -261,10 +261,7 @@ const InvoiceSection = () => {
       <div className="vendor-details">
         <h1>
           <span>
-            <img
-              src="/src/assests/communication_16242323.png"
-              alt="Vendor Icon"
-            />
+            <img src="/communication_16242323.png" alt="Vendor Icon" />
           </span>
           Comments
         </h1>
