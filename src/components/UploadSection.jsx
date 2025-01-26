@@ -102,7 +102,7 @@ const UploadSection = () => {
         <Title>Upload Your Invoice</Title>
         <Description>To auto-populate fields and save time</Description>
         <ImageContainer>
-          <img src="/image.png" alt="Upload Invoice" />
+          <img src="/src/assests/image.png" alt="Upload Invoice" />
         </ImageContainer>
 
         {/* The button that triggers the file input */}
