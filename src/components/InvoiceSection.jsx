@@ -7,19 +7,10 @@ import {
   PlusIcon,
   EllipsisVertical,
 } from "lucide-react";
-import * as Yup from "yup";
 import { FormikInput, FormRow } from "./common/FormikFields";
+import { validationSchema } from "./validationSchema"; // Import validation schema
 
 const InvoiceSection = () => {
-  const vendorValidationSchema = Yup.object({
-    vendor: Yup.string().required("Please select a vendor"),
-  });
-
-  const invoiceValidationSchema = Yup.object({
-    purchaseOrder: Yup.string().required("Purchase Order is required"),
-    invoiceDate: Yup.date().required("Invoice Date is required"),
-  });
-
   const vendors = [
     { value: "A - 1 Exterminators", label: "A - 1 Exterminators" },
   ];
@@ -35,20 +26,20 @@ const InvoiceSection = () => {
   ];
 
   const initialValues = {
+    vendor: "",
     purchaseOrder: "",
     invoiceDate: "",
     paymentTerm: "",
     invoiceDueDate: "",
     glPostDate: "",
+    totalAmount: "",
+    invoiceDescription: "",
+    lineAmount: "",
+    department: "",
+    account: "",
+    location: "",
+    comment: "",
   };
-
-  const validationSchema = Yup.object({
-    purchaseOrder: Yup.string().required("Purchase Order is required"),
-    invoiceDate: Yup.date().required("Invoice Date is required"),
-    paymentTerm: Yup.string().required("Payment Term is required"),
-    invoiceDueDate: Yup.date().required("Invoice Due Date is required"),
-    glPostDate: Yup.date().required("GL Post Date is required"),
-  });
 
   return (
     <div className="invoice-section">
@@ -63,7 +54,7 @@ const InvoiceSection = () => {
         <h2>Vendor Information</h2>
         <Formik
           initialValues={{ vendor: "" }}
-          validationSchema={vendorValidationSchema}
+          validationSchema={validationSchema}
           onSubmit={(values) => console.log(values)}
         >
           {({ errors, touched }) => (
@@ -173,10 +164,10 @@ const InvoiceSection = () => {
 
               <FormikInput
                 label="Invoice Description"
-                name="invoiceDate"
+                name="invoiceDescription"
                 type="textarea"
-                error={errors.invoiceDate}
-                touched={touched.invoiceDate}
+                error={errors.invoiceDescription}
+                touched={touched.invoiceDescription}
                 icon={<CalendarDays />}
               />
             </Form>
@@ -187,71 +178,86 @@ const InvoiceSection = () => {
       {/* Expense Section */}
       <div className="vendor-details">
         <h2>Expense Details</h2>
-
         <Formik
-          initialValues={{ purchaseOrder: "", invoiceDate: "" }}
-          validationSchema={invoiceValidationSchema}
+          initialValues={initialValues}
+          validationSchema={validationSchema}
           onSubmit={(values) => console.log(values)}
         >
           {({ errors, touched }) => (
             <Form>
+              {/* First Row: Amount Input */}
               <FormRow>
                 <FormikInput
-                  label="Line Amount"
-                  name="purchaseOrder"
-                  type="select"
-                  options={purchaseOrders}
-                  error={errors.purchaseOrder}
-                  touched={touched.purchaseOrder}
+                  label="Amount"
+                  name="lineAmount"
+                  type="text"
+                  placeholder="Enter amount"
+                  error={errors.lineAmount}
+                  touched={touched.lineAmount}
+                  icon={<DollarSign />}
                 />
                 <FormikInput
                   label="Department"
-                  name="invoiceDate"
-                  type="date"
-                  error={errors.invoiceDate}
-                  touched={touched.invoiceDate}
-                  icon={<CalendarDays />}
+                  name="department"
+                  type="select"
+                  options={[
+                    { value: "HR", label: "HR" },
+                    { value: "Finance", label: "Finance" },
+                    { value: "IT", label: "IT" },
+                    { value: "Marketing", label: "Marketing" },
+                  ]}
+                  error={errors.department}
+                  touched={touched.department}
                 />
               </FormRow>
 
+              {/* Second Row: Select Inputs (Department and Account) */}
               <FormRow>
                 <FormikInput
                   label="Account"
-                  name="invoiceDate"
+                  name="account"
                   type="select"
-                  error={errors.invoiceDate}
-                  touched={touched.invoiceDate}
-                  icon={<CalendarDays />}
-                />
+                  options={[
+                    { value: "Revenue", label: "Revenue" },
+                    { value: "Expenses", label: "Expenses" },
+                  ]}
+                  error={errors.account}
+                  touched={touched.account}
+                />{" "}
                 <FormikInput
                   label="Location"
-                  name="invoiceDate"
+                  name="department"
                   type="select"
-                  error={errors.invoiceDate}
-                  touched={touched.invoiceDate}
-                  icon={<CalendarDays />}
+                  options={[
+                    { value: "New York", label: "New York" },
+                    { value: "Los Angeles", label: "Los Angeles" },
+                    { value: "Chicago", label: "Chicago" },
+                  ]}
+                  error={errors.department}
+                  touched={touched.department}
                 />
               </FormRow>
 
+              {/* Additional Row: Description */}
               <FormikInput
-                label=" Description"
-                name="invoiceDate"
+                label="Description"
+                name="expenseDescription"
                 type="textarea"
-                error={errors.invoiceDate}
-                touched={touched.invoiceDate}
-                icon={<CalendarDays />}
+                error={errors.expenseDescription}
+                touched={touched.expenseDescription}
               />
+
+              {/* Add Expense Button */}
+              <button className="add-expense">
+                <PlusIcon />
+                Add Expense
+              </button>
             </Form>
           )}
         </Formik>
-        <button className="add-expense">
-          {" "}
-          <PlusIcon />
-          Add Expense coding
-        </button>
       </div>
 
-      {/* Comment section */}
+      {/* Comment Section */}
       <div className="vendor-details">
         <h1>
           <span>
@@ -262,26 +268,25 @@ const InvoiceSection = () => {
           </span>
           Comments
         </h1>
-
         <Formik
-          initialValues={{ vendor: "" }}
-          validationSchema={vendorValidationSchema}
+          initialValues={{ comment: "" }}
+          validationSchema={validationSchema}
           onSubmit={(values) => console.log(values)}
         >
           {({ errors, touched }) => (
             <Form>
               <FormikInput
-                name="vendor"
+                name="comment"
                 type="textarea"
-                options={vendors}
-                error={errors.vendor}
-                touched={touched.vendor}
                 placeholder="Add a comment and use @Name to tag someone"
+                error={errors.comment}
+                touched={touched.comment}
               />
             </Form>
           )}
         </Formik>
       </div>
+
       <div className="buttons">
         <div>
           <EllipsisVertical />
