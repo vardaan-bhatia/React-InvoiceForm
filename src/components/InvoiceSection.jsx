@@ -1,6 +1,12 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import { CalendarDays, ChevronDown, DollarSign, PlusIcon } from "lucide-react";
+import {
+  CalendarDays,
+  ChevronDown,
+  DollarSign,
+  PlusIcon,
+  EllipsisVertical,
+} from "lucide-react";
 import * as Yup from "yup";
 import { FormikInput, FormRow } from "./common/FormikFields";
 
@@ -181,6 +187,7 @@ const InvoiceSection = () => {
       {/* Expense Section */}
       <div className="vendor-details">
         <h2>Expense Details</h2>
+
         <Formik
           initialValues={{ purchaseOrder: "", invoiceDate: "" }}
           validationSchema={invoiceValidationSchema}
@@ -276,7 +283,9 @@ const InvoiceSection = () => {
         </Formik>
       </div>
       <div className="buttons">
-        <div>ff</div>
+        <div>
+          <EllipsisVertical />
+        </div>
         <button type="button" className="btn btn-draft">
           Save as Draft
         </button>
