@@ -1,0 +1,184 @@
+/* General container styles */
+.dashboard-container {
+  padding: 8px;
+}
+
+/* Header Section */
+.header {
+  width: 1440px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding-left: 20px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+  margin: 0;
+}
+
+.icon {
+  cursor: pointer;
+  color: #000;
+}
+
+.tabs {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  justify-content: flex-start; /* Align tabs to the left */
+  width: 50%;
+  padding-left: 20px;
+}
+
+.tab {
+  font-size: 16px;
+  color: #757575;
+  cursor: pointer;
+  padding-bottom: 4px;
+}
+
+.tab.active {
+  font-weight: 500;
+  color: #000;
+  border-bottom: 2px solid #007bff;
+}
+
+/* Main Container */
+.main-container {
+  display: flex;
+  gap: 24px; /* Spacing between sections */
+  margin-top: 16px;
+}
+
+/* Invoice Section */
+.invoice-section {
+  height: 1424px;
+  width: 684px;
+}
+/* Vendor Select Field Styles */
+.vendor-details h1 {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+.vendor-details h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+.vendor-details h1 span img {
+  background-color: #e8f3fc;
+  border-radius: 50%;
+  padding: 10px;
+  height: 45px;
+  width: 45px;
+}
+.form-group {
+  margin-bottom: 2px;
+  width: 100%;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+.form-group p {
+  color: #64748b;
+}
+.form-control {
+  width: 100%;
+  padding: 8px 16px;
+  font-size: 14px;
+  border: 2px solid #64748b;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #1f2937;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 1px 4px 0px;
+}
+
+.form-control:hover {
+  border-color: #9ca3af;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.error {
+  color: #dc2626;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.form-control:disabled {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
+}
+.view-vendor-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #1680d5;
+  margin-bottom: 30px;
+}
+.btn-link {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-row {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.form-control[type="date"] {
+  cursor: pointer;
+}
+.add-expense {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 30%;
+  padding: 5px;
+  margin-left: auto;
+  background: transparent;
+  border: 2px solid #64748b;
+  border-radius: 6px;
+  color: #1f1f1f;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
