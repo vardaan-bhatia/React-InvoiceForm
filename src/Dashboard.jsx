@@ -5,6 +5,10 @@ import UploadSection from "./components/UploadSection";
 import InvoiceSection from "./components/InvoiceSection";
 
 const Dashboard = () => {
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.href = "/";
+  };
   return (
     <div className="dashboard-container">
       {/* Header Section */}
@@ -17,6 +21,9 @@ const Dashboard = () => {
           <p className="tab active">Vendor Details</p>
           <p className="tab">Invoice Details</p>
           <p className="tab">Comments</p>
+          <div>
+            <button onClick={handleLogout}>Logout</button>
+          </div>
         </div>
       </div>
 
