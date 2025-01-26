@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { ArrowUpToLineIcon } from "lucide-react";
 import styled from "styled-components";
 
@@ -76,7 +76,26 @@ const UploadText = styled.p`
   }
 `;
 
+const FileInput = styled.input`
+  display: none; /* Hide the actual file input */
+`;
+
 const UploadSection = () => {
+  const fileInputRef = useRef(null); // Reference to the file input
+  const [file, setFile] = useState(null);
+
+  const handleUploadButtonClick = () => {
+    // Trigger the file input click when the UploadButton is clicked
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+    }
+  };
+
   return (
     <UploadContainer>
       <Content>
@@ -85,12 +104,19 @@ const UploadSection = () => {
         <ImageContainer>
           <img src="/image.png" alt="Upload Invoice" />
         </ImageContainer>
-        <UploadButton>
+
+        {/* The button that triggers the file input */}
+        <UploadButton onClick={handleUploadButtonClick}>
           Upload File
           <span>
             <ArrowUpToLineIcon />
           </span>
         </UploadButton>
+
+        <FileInput type="file" ref={fileInputRef} onChange={handleFileChange} />
+
+        {file && <p>File Selected: {file.name}</p>}
+
         <UploadText>
           <span>Click to upload</span> or Drag and drop
         </UploadText>

@@ -180,7 +180,7 @@ const InvoiceSection = () => {
 
       {/* Expense Section */}
       <div className="vendor-details">
-        <h2>General Information</h2>
+        <h2>Expense Details</h2>
         <Formik
           initialValues={{ purchaseOrder: "", invoiceDate: "" }}
           validationSchema={invoiceValidationSchema}

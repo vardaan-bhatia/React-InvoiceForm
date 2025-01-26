@@ -2,6 +2,7 @@ import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 const validationSchema = Yup.object({
   username: Yup.string()
@@ -12,6 +13,88 @@ const validationSchema = Yup.object({
     .required("Password is required"),
 });
 
+// Styled components
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #cfe0f7, #9f99e6);
+`;
+
+const Card = styled.div`
+  width: 100%;
+  max-width: 28rem;
+  margin: 0 1rem;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.01);
+  }
+`;
+
+const Title = styled.h2`
+  font-size: 1.875rem;
+  font-weight: bold;
+  text-align: center;
+  color: #2d2d2d;
+  margin-bottom: 2rem;
+`;
+
+const Label = styled.label`
+  display: block;
+  font-size: 0.875rem;
+  font-weight: medium;
+  color: #4a4a4a;
+  margin-bottom: 0.25rem;
+`;
+
+const Input = styled(Field)`
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid ${({ hasError }) => (hasError ? "#e74c3c" : "#dcdcdc")};
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+  &:focus {
+    outline: none;
+    border-color: transparent;
+    box-shadow: 0 0 0 2px
+      ${({ hasError }) => (hasError ? "#e74c3c" : "#3498db")};
+  }
+`;
+
+const ErrorText = styled.div`
+  color: #e74c3c;
+  font-size: 0.875rem;
+`;
+
+const SubmitButton = styled.button`
+  margin-top: 0.3rem;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #3498db;
+  color: white;
+  font-weight: bold;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: #2980b9;
+    transform: scale(1.02);
+  }
+  &:active {
+    transform: scale(0.98);
+  }
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #3498db;
+  }
+`;
+
 function LoginForm() {
   const navigate = useNavigate();
   const handleSubmit = (values) => {
@@ -20,82 +103,50 @@ function LoginForm() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-100 to-purple-100">
-      <div className="w-full max-w-md mx-4 bg-white rounded-xl shadow-2xl p-8 transform transition-all hover:scale-[1.01]">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
-          Welcome Back
-        </h2>
+    <Container>
+      <Card>
+        <Title>Welcome Back</Title>
         <Formik
           initialValues={{ username: "", password: "" }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
           {({ errors, touched }) => (
-            <Form className="space-y-6">
+            <Form>
               <div>
-                <label
-                  htmlFor="username"
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  Username
-                </label>
-                <Field
+                <Label htmlFor="username">Username</Label>
+                <Input
                   type="text"
                   name="username"
                   id="username"
                   placeholder="Enter your username"
-                  className={`w-full px-4 py-3 rounded-lg border ${
-                    errors.username && touched.username
-                      ? "border-red-500 focus:ring-red-500"
-                      : "border-gray-300 focus:ring-blue-500"
-                  } focus:border-transparent focus:outline-none focus:ring-2`}
+                  hasError={errors.username && touched.username}
                 />
                 {errors.username && touched.username && (
-                  <div className="text-red-500 text-sm mt-1">
-                    {errors.username}
-                  </div>
+                  <ErrorText>{errors.username}</ErrorText>
                 )}
               </div>
 
               <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  Password
-                </label>
-                <Field
+                <Label htmlFor="password">Password</Label>
+                <Input
                   type="password"
                   name="password"
                   id="password"
                   placeholder="Enter your password"
-                  className={`w-full px-4 py-3 rounded-lg border ${
-                    errors.password && touched.password
-                      ? "border-red-500 focus:ring-red-500"
-                      : "border-gray-300 focus:ring-blue-500"
-                  } focus:border-transparent focus:outline-none focus:ring-2`}
+                  hasError={errors.password && touched.password}
                 />
                 {errors.password && touched.password && (
-                  <div className="text-red-500 text-sm mt-1">
-                    {errors.password}
-                  </div>
+                  <ErrorText>{errors.password}</ErrorText>
                 )}
               </div>
 
-              <button
-                type="submit"
-                className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold 
-                         hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 
-                         focus:ring-offset-2 transform transition-all duration-200 
-                         hover:scale-[1.02] active:scale-[0.98]"
-              >
-                Sign In
-              </button>
+              <SubmitButton type="submit">Sign In</SubmitButton>
             </Form>
           )}
         </Formik>
-      </div>
-    </div>
+      </Card>
+    </Container>
   );
 }
 
