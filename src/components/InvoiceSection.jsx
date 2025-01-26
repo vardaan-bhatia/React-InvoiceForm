@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, Field, Form } from "formik";
+import { Formik, Form } from "formik";
 import { CalendarDays, ChevronDown, DollarSign, PlusIcon } from "lucide-react";
 import * as Yup from "yup";
 import { FormikInput, FormRow } from "./common/FormikFields";
@@ -274,6 +274,15 @@ const InvoiceSection = () => {
             </Form>
           )}
         </Formik>
+      </div>
+      <div className="buttons">
+        <div>ff</div>
+        <button type="button" className="btn btn-draft">
+          Save as Draft
+        </button>
+        <button type="button" className="btn btn-submit">
+          Submit and New
+        </button>
       </div>
     </div>
   );
