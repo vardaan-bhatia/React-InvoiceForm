@@ -6,9 +6,9 @@
 
 The Invoice Management System is a modern web application designed to streamline vendor, invoice, and expense management. Built with cutting-edge web technologies, this application provides a robust solution for businesses to track and manage their financial documentation efficiently.
 
-![alt text](image-1.png)
+![alt text](./src/assests/image-1.png)
 
-![alt text](image-2.png)
+![alt text](./src/assests/image-2.png)
 
 ## 🚀 Features
 
